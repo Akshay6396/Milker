@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Product List
+        <button type="button" class="btn btn-primary pull-right" (click)="addItem(0)"><span class="glyphicon glyphicon-plus"></span>
+          Add Item</button>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>last Name</th>
+              <th>Email</th>
+              <th>Image</th>
+              <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of Element ;let i = index">
+              <td>{{item.id }}</td>
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.email}}</td>
+              <td>Image</td>
+              <td class="text-center"><button type="button" class="btn btn-primary" (click)="addItem(item.id)">Edit
+                  {{item.firstName}}</button>
+                <button type="button" class="btn btn-danger " (click)="removeItem(i)">remove {{item.firstName}}</button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+                                      <!-- Open Add Modal -->
+<div bsModal #addItemModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <form [formGroup]="productForm" (ngSubmit)="onAddSubmit()">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 *ngIf="!isEdit" id="dialog-child-name" class="modal-title pull-left">Add Product</h4>
+          <h4 *ngIf="isEdit" id="dialog-child-name" class="modal-title pull-left">Edit Product</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="firstName-name" class="col-form-label">firstName:</label>
+            <input type="text" formControlName="firstName" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="lastName-name" class="col-form-label">lastName:</label>
+            <input type="text" formControlName="lastName" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="email-name" class="col-form-label">email:</label>
+            <input type="text" formControlName="email" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="image" class="cabinet center-block" >
+            <figure>
+                <figcaption><i class="fa fa-camera"></i></figcaption>
+              </figure>
+            <input type="file" class="item-img file center-block" formControlName="image" (change)="fileChangeEvent($event)" />
+          </label>
+                <!-- <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 3"
+                    [resizeToWidth]="128"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+                
+                <img [src]="croppedImage" /> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideModal()">Close</button>
+          <button *ngIf="isEdit"type="submit" class="btn btn-primary">Save changes</button>
+          <button *ngIf="!isEdit"type="submit" class="btn btn-primary">Save Item</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
