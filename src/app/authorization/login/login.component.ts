@@ -19,24 +19,23 @@ export class LoginComponent implements OnInit {
         private alertService: AlertService, ) { }
 
     ngOnInit() {
-        debugger;
-        if (this.authenticationService.isLoggedIn) {
+        if (localStorage.getItem('token')) {
             this.router.navigate(['/productlisting']);
         }
+
         this.loginForm = this.formBuilder.group({
             PhoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
             password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         });
 
-
         // reset login status
-        this.authenticationService.logout();
+        // this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    // convenience getter for easy access to form fields
+        // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
     keyPress(event: any) {
@@ -49,8 +48,6 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        debugger;
-        this.authenticationService.isLoggedIn = true;
         localStorage.setItem('token', 'akshay');
         this.router.navigate(['/productlisting']);
         // this.submitted = true;
