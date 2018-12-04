@@ -11,7 +11,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
-import { ReactiveFormsModule, } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, } from '@angular/forms';
 import { AlertService, AuthenticationService, UserService } from './service/index';
 import { HttpClientModule, } from '@angular/common/http'
 
@@ -26,6 +26,9 @@ import { OrdersComponent } from './milker/orders/orders.component';
 import { ProductListingComponent } from './milker/product-listing/product-listing.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { LoginComponent } from './authorization/login/login.component';
+import { RegisterComponent } from './authorization/register/register.component';
+import {AuthGuard} from './guards'
 
 @NgModule({
   imports: [
@@ -38,6 +41,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ModalModule.forRoot(),
     // ImageCropperModule,
     HttpClientModule,
+    FormsModule,
   ],
   declarations: [
     AppComponent,
@@ -49,6 +53,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AsideToggleDirective,
     OrdersComponent,
     ProductListingComponent,
+    LoginComponent,
+    RegisterComponent,
 
   ],
   providers: [{
@@ -58,6 +64,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AlertService,
     AuthenticationService,
     UserService,
+    AuthGuard
 
   ],
   bootstrap: [AppComponent]

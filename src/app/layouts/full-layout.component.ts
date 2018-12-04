@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../service/index';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullLayoutComponent implements OnInit {
 
-  public disabled = false;
-  public status: {isopen: boolean} = {isopen: false};
-
-  public toggled(open: boolean): void {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,){ }
+    public disabled = false;
+    public status: {isopen: boolean} = {isopen: false};
+    public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
   }
 
@@ -21,7 +25,7 @@ export class FullLayoutComponent implements OnInit {
   logout() {
     // remove user from local storage to log user out
     debugger;
-    localStorage.removeItem('token');
+    this.authenticationService.logout()
 }
 
   ngOnInit(): void {}

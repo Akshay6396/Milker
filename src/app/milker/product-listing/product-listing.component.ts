@@ -20,6 +20,9 @@ export class ProductListingComponent implements OnInit {
   productForm: FormGroup;
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  pagesIndex : Array<number>;
+  pageStart : number = 1;
+  pages : number = 4;
 
 
   Element: any = [

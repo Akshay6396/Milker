@@ -4,10 +4,13 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import {_throw} from 'rxjs/observable/throw';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: HttpClient) { }
+    constructor(
+        private router : Router,
+        private http: HttpClient) { }
 
     login(phoneNumber: number, password: string) {
         debugger;
@@ -32,5 +35,6 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('token');
+        this.router.navigate(['/login'])
     }
 }

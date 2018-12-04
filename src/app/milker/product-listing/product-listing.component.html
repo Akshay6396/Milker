@@ -3,11 +3,11 @@
     <div class="card">
       <div class="card-header">
         <i class="fa fa-align-justify"></i> Product List
-        <button type="button" class="btn btn-primary pull-right" (click)="addItem(0)"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary pull-right icon-plus" (click)="addItem(0)"><span class="glyphicon glyphicon-plus"></span>
           Add Item</button>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+        <table  class="table table-bordered table-striped table-sm">
           <thead>
             <tr>
               <th>Id</th>
@@ -25,21 +25,20 @@
               <td>{{item.lastName}}</td>
               <td>{{item.email}}</td>
               <td>Image</td>
-              <td class="text-center"><button type="button" class="btn btn-primary" (click)="addItem(item.id)">Edit
-                  {{item.firstName}}</button>
-                <button type="button" class="btn btn-danger " (click)="removeItem(i)">remove {{item.firstName}}</button>
+              <td class="text-center"><button type="button" class="btn btn-primary icon-pencil" (click)="addItem(item.id)"></button>
+                <button type="button" class="btn btn-danger icon-trash" (click)="removeItem(i)"></button>
               </td>
-
             </tr>
           </tbody>
         </table>
         <nav>
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-          </ul>
+          <ul class="pagination" >
+            <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}" ><a  (click)="prevPage()" href="#">Prev</a></li>
+               <li *ngFor="let page of pagesIndex"  [ngClass]="{'active': (currentIndex == page)}">
+                  <a (click)="setPage(page)" href="#" >{{page}}</a>
+               </li>
+            <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}" ><a   (click)="nextPage()" href="#">Next</a></li>
+         </ul>
         </nav>
       </div>
     </div>

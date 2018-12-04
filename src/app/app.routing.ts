@@ -6,17 +6,21 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 import {ProductListingComponent} from './milker/product-listing/product-listing.component';
 import {OrdersComponent} from './milker/orders/orders.component';
+import{LoginComponent} from './authorization/login/login.component'
+import { RegisterComponent } from './authorization/register/register.component';
+import {AuthGuard} from './guards/auth.guard'
 
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: '',
     component: FullLayoutComponent,
+    canActivate:[AuthGuard],
     data: {
       title: 'Home'
     },
@@ -42,7 +46,7 @@ export const routes: Routes = [
         loadChildren: './chartjs/chartjs.module#ChartJSModule'
       },
       { path:'productlisting',
-        component: ProductListingComponent
+        component: ProductListingComponent,
       },
       {
         path:'orders',
@@ -53,6 +57,7 @@ export const routes: Routes = [
   {
     path: 'pages',
     component: SimpleLayoutComponent,
+    canActivate:[AuthGuard],
     data: {
       title: 'Pages'
     },
@@ -62,6 +67,14 @@ export const routes: Routes = [
         loadChildren: './pages/pages.module#PagesModule',
       }
     ]
+  },
+  {
+    path:'login',
+    component:LoginComponent
+  },
+  {
+    path:'register',
+    component : RegisterComponent
   }
 ];
 
