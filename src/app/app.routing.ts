@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import {ProductListingComponent} from './milker/product-listing/product-listing.component';
-import {OrdersComponent} from './milker/orders/orders.component';
-import{LoginComponent} from './authorization/login/login.component'
+import { ProductListingComponent } from './milker/product-listing/product-listing.component';
+import { OrdersComponent } from './milker/orders/orders.component';
+import { LoginComponent } from './authorization/login/login.component'
 import { RegisterComponent } from './authorization/register/register.component';
-import {AuthGuard} from './guards/auth.guard'
+import { AuthGuard } from './guards/auth.guard'
 
 
 export const routes: Routes = [
@@ -20,7 +20,7 @@ export const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -45,19 +45,20 @@ export const routes: Routes = [
         path: 'charts',
         loadChildren: './chartjs/chartjs.module#ChartJSModule'
       },
-      { path:'productlisting',
+      {
+        path: 'productlisting',
         component: ProductListingComponent,
       },
       {
-        path:'orders',
-        component : OrdersComponent
+        path: 'orders',
+        component: OrdersComponent
       }
     ]
   },
   {
     path: 'pages',
     component: SimpleLayoutComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Pages'
     },
@@ -69,12 +70,12 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'login',
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path:'register',
-    component : RegisterComponent
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
