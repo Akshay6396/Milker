@@ -29,6 +29,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegisterComponent } from './authorization/register/register.component';
 import {AuthGuard} from './guards'
+import { SearchPipe } from './pipe/search.pipe';
 
 @NgModule({
   imports: [
@@ -55,7 +56,7 @@ import {AuthGuard} from './guards'
     ProductListingComponent,
     LoginComponent,
     RegisterComponent,
-
+    SearchPipe
   ],
   providers: [{
     provide: LocationStrategy,

@@ -23,19 +23,19 @@ export class ProductListingComponent implements OnInit {
   pagesIndex : Array<number>;
   pageStart : number = 1;
   pages : number = 4;
-
+  email="";
 
   Element: any = [
-    { id: 1, firstName: 'John', lastName: 'Doe', email: 'john@gmail.com' },
+    { id: 1, firstName: 'John', lastName: 'Akshay', email: 'john@gmail.com' },
     { id: 2, firstName: 'Mike', lastName: 'Hussey', email: 'mike@gmail.com' },
     { id: 3, firstName: 'Ricky', lastName: 'Hans', email: 'ricky@gmail.com' },
     { id: 4, firstName: 'Martin', lastName: 'Kos', email: 'martin@gmail.com' },
     { id: 5, firstName: 'Tom', lastName: 'Paisa', email: 'tom@gmail.com' },
     { id: 1, firstName: 'John', lastName: 'Doe', email: 'john@gmail.com' },
-    { id: 2, firstName: 'Mike', lastName: 'Hussey', email: 'mike@gmail.com' },
+    { id: 2, firstName: 'Mike', lastName: 'Hussey', email: 'mike123@gmail.com' },
     { id: 3, firstName: 'Ricky', lastName: 'Hans', email: 'ricky@gmail.com' },
-    { id: 4, firstName: 'Martin', lastName: 'Kos', email: 'martin@gmail.com' },
-    { id: 5, firstName: 'Tom', lastName: 'Paisa', email: 'tom@gmail.com' },
+    { id: 4, firstName: 'Martin', lastName: 'Kos', email: 'martin1@gmail.com' },
+    { id: 5, firstName: 'Tom', lastName: 'Paisa', email: 'tom2@gmail.com' },
     { id: 1, firstName: 'John', lastName: 'Doe', email: 'john@gmail.com' },
     { id: 2, firstName: 'Mike', lastName: 'Hussey', email: 'mike@gmail.com' },
     { id: 3, firstName: 'Ricky', lastName: 'Hans', email: 'ricky@gmail.com' },
