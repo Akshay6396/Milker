@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-    isLoggedIn: boolean = false;
     constructor(
         private router: Router,
         private http: HttpClient) { }
@@ -18,7 +17,6 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiUrl}/account/login`, { PhoneNumber: phoneNumber, Password: password })
             .pipe(map(result => {
                 debugger;
-                this.isLoggedIn = true;
                 // return result;
                 // login successful if there's a jwt token in the response
                 if (result && result.Status) {
@@ -37,7 +35,6 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('token');
-        this.isLoggedIn = false;
         this.router.navigate(['/login'])
     }
 }
