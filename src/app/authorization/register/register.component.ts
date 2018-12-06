@@ -18,7 +18,8 @@ export class RegisterComponent {
       LastName: ['', Validators.required],
       PhoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
       EmailId: ['', Validators.compose([Validators.required, CustomValidators.email])],
-      Password: ['', Validators.required],
+      Password: ['', Validators.required, Validators.minLength(6)],
+      ConfirmPassword: ['', Validators.required, Validators.minLength(6)]
     });
     debugger;
   }

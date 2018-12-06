@@ -14,7 +14,7 @@
                   <input type="text" class="form-control" formControlName="FirstName" placeholder="FirstName">
                 </div>
                 <div *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)" class="alert alert-danger">
-                  <div [hidden]="this.regdForm.controls['FirstName'].valid">
+                  <div [hidden]="this. regdForm.controls['FirstName'].valid">
                     First Name is required
                   </div>
                 </div>
@@ -72,21 +72,21 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" [disabled]="!regdForm.valid" class="btn btn-block btn-success">Create Account</button>
+              <div class="form-group">
+                <div class="input-group mb-4">
+                  <span class="input-group-addon"><i class="icon-lock"></i></span>
+                  <input type="password" class="form-control" formControlName="ConfirmPassword" placeholder=" Confirm Password ">
+                </div>
+                <div *ngIf="f.ConfirmPassword.invalid && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)" class="alert alert-danger">
+                  <div [hidden]="this.regdForm.controls['ConfirmPassword'].valid">
+                    Confirm Password 
+                  </div>
+                </div>
+              </div>
+              <button type="submit" [disabled]="!regdForm.valid" class="btn btn-block btn-success" [disabled]="! isValid">Create Account</button>
             </form>
           </div>
 
-          <div class="card-footer p-4">
-            <div class="row">
-              <div class="col-6">
-                <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-              </div>
-              <div class="col-6">
-                <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </div>

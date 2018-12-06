@@ -5,10 +5,10 @@
         <i class="fa fa-align-justify"></i> Product List
         <button type="button" class="btn btn-primary pull-right icon-plus" (click)="addItem(0)"><span class="glyphicon glyphicon-plus"></span>
           Add Item</button>
-        <input type="text" [(ngModel)]="email" placeholder="Search here"/>
+        <input type="text" [(ngModel)]="email" placeholder="Search here" />
       </div>
       <div class="card-body">
-        <table  class="table table-bordered table-striped table-sm">
+        <table class="table table-bordered table-striped table-sm">
           <thead>
             <tr>
               <th>Id</th>
@@ -33,20 +33,20 @@
           </tbody>
         </table>
         <nav>
-          <ul class="pagination" >
-            <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}" ><a  (click)="prevPage()" href="#">Prev</a></li>
-               <li *ngFor="let page of pagesIndex"  [ngClass]="{'active': (currentIndex == page)}">
-                  <a (click)="setPage(page)" href="#" >{{page}}</a>
-               </li>
-            <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}" ><a   (click)="nextPage()" href="#">Next</a></li>
-         </ul>
+          <ul class="pagination">
+            <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}"><a (click)="prevPage()" href="#">Prev</a></li>
+            <li *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
+              <a (click)="setPage(page)" href="#">{{page}}</a>
+            </li>
+            <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}"><a (click)="nextPage()" href="#">Next</a></li>
+          </ul>
         </nav>
       </div>
     </div>
   </div>
 </div>
 
-                                      <!-- Open Add Modal -->
+<!-- Open Add Modal -->
 <div bsModal #addItemModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
   <form [formGroup]="productForm" (ngSubmit)="onAddSubmit()">
     <div class="modal-dialog ">
@@ -58,27 +58,42 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <div class="form-group">
-            <label for="firstName-name" class="col-form-label">firstName:</label>
+            <label for="firstName-name" class="col-form-label">First Name:</label>
             <input type="text" formControlName="firstName" class="form-control" id="recipient-name">
+            <div *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)" class="alert alert-danger">
+              <div [hidden]="this.productForm.controls['firstName'].valid">
+                First Name is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <label for="lastName-name" class="col-form-label">lastName:</label>
+            <label for="lastName-name" class="col-form-label">Last Name:</label>
             <input type="text" formControlName="lastName" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="email-name" class="col-form-label">email:</label>
-            <input type="text" formControlName="email" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="image" class="cabinet center-block" >
-            <figure>
-                <figcaption><i class="fa fa-camera"></i></figcaption>
-              </figure>
-            <input type="file" class="item-img file center-block" formControlName="image" (change)="fileChangeEvent($event)" />
-          </label>
-                <!-- <image-cropper
+            <div *ngIf="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)" class="alert alert-danger">
+              <div [hidden]="this.productForm.controls['lastName'].valid">
+                Last Name is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email-name" class="col-form-label">Email:</label>
+              <input type="text" formControlName="email" class="form-control" id="recipient-name">
+              <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+                <div [hidden]="this.productForm.controls['email'].valid ">
+                  Please enter a valid email
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="image" class="cabinet center-block">
+                <figure>
+                  <figcaption><i class="fa fa-camera"></i></figcaption>
+                </figure>
+                <input type="file" class="item-img file center-block" formControlName="image" (change)="fileChangeEvent($event)" />
+              </label>
+              <!-- <image-cropper
                     [imageChangedEvent]="imageChangedEvent"
                     [maintainAspectRatio]="true"
                     [aspectRatio]="4 / 3"
@@ -90,12 +105,13 @@
                 ></image-cropper>
                 
                 <img [src]="croppedImage" /> -->
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideModal()">Close</button>
-          <button *ngIf="isEdit"type="submit" class="btn btn-primary">Save changes</button>
-          <button *ngIf="!isEdit"type="submit" class="btn btn-primary">Save Item</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideModal()">Close</button>
+            <button *ngIf="isEdit" type="submit" class="btn btn-primary" [disabled]="!isValid">Save changes</button>
+            <button *ngIf="!isEdit" type="submit" class="btn btn-primary" [disabled]="!isValid">Save Item</button>
+          </div>
         </div>
       </div>
     </div>

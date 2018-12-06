@@ -79,7 +79,7 @@ export const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'forgot',
+    path: 'forgotPassword',
     component: ForgotComponent
   }
 ];

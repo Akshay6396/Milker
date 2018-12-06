@@ -109,6 +109,7 @@ export class ProductListingComponent implements OnInit {
       this.addItemModal.show();
     }
   }
+  get f() { return this. productForm.controls; }
   onAddSubmit() {
     debugger;
     let add = this.productForm.value;
