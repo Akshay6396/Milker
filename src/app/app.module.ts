@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy, } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, CommonModule, } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -30,6 +30,7 @@ import { LoginComponent } from './authorization/login/login.component';
 import { RegisterComponent } from './authorization/register/register.component';
 import {AuthGuard} from './guards'
 import { SearchPipe } from './pipe/search.pipe';
+import { ForgotComponent } from './authorization/forgot/forgot.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { SearchPipe } from './pipe/search.pipe';
     // ImageCropperModule,
     HttpClientModule,
     FormsModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,
@@ -56,7 +58,8 @@ import { SearchPipe } from './pipe/search.pipe';
     ProductListingComponent,
     LoginComponent,
     RegisterComponent,
-    SearchPipe
+    SearchPipe,
+    ForgotComponent
   ],
   providers: [{
     provide: LocationStrategy,
@@ -65,8 +68,7 @@ import { SearchPipe } from './pipe/search.pipe';
     AlertService,
     AuthenticationService,
     UserService,
-    AuthGuard
-
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

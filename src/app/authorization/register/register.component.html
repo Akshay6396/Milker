@@ -1,57 +1,94 @@
 <div class="app flex-row align-items-center">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card mx-4">
-            <div class="card-body p-4">
-              <form [formGroup]="regdForm"  (ngSubmit)="onSubmit()" >
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <form [formGroup]="regdForm" (ngSubmit)="onSubmit()">
               <h1>Register</h1>
               <p class="text-muted">Create your account</p>
+
               <div class="form-group">
-              <div class="input-group mb-3">
-                <span class="input-group-addon"><i class="icon-user"></i></span>
-                <input type="text" class="form-control" formControlName="PhoneNumber" placeholder="PhoneNumber">
+                <div class="input-group mb-3">
+                  <span class="input-group-addon"><i class="icon-user"></i></span>
+                  <input type="text" class="form-control" formControlName="FirstName" placeholder="FirstName">
+                </div>
+                <div *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)" class="alert alert-danger">
+                  <div [hidden]="this.regdForm.controls['FirstName'].valid">
+                    First Name is required
+                  </div>
+                </div>
               </div>
-            </div>
-            
-            <div class="form-group">
-              <div class="input-group mb-3">
-                <span class="input-group-addon">@</span>
-                <input type="text" class="form-control" formControlName="Email" placeholder="Email">
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <span class="input-group-addon"><i class="icon-user"></i></span>
+                  <input type="text" class="form-control" formControlName="LastName" placeholder="Last Name">
+                </div>
+                <div *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)" class="alert alert-danger">
+                  <div [hidden]="this.regdForm.controls['LastName'].valid">
+                    Last Name is required
+                  </div>
+                </div>
               </div>
-            </div>
-  
-            <div class="form-group">
-              <div class="input-group mb-3">
-                <span class="input-group-addon"><i class="icon-lock"></i></span>
-                <input type="password" class="form-control" formControlName="Password" placeholder="Password">
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <span class="input-group-addon"><i class="fa fa-mobile-phone  fa-lg "></i></span>
+                  <input type="text" class="form-control" formControlName="PhoneNumber" placeholder="Phone Number">
+                </div>
+                <div *ngIf="f.PhoneNumber.invalid && (f.PhoneNumber.dirty || f.PhoneNumber.touched)" class="alert alert-danger">
+                  <div [hidden]="f.PhoneNumber.valid  ||f.PhoneNumber.errors.minlength||f.PhoneNumber.errors.maxlength">
+                    Phone Number is required </div>
+                  <div *ngIf="f.PhoneNumber.errors.minlength">
+                    Phone Number length must be less than or equal to 10 characters long
+                  </div>
+                  <div *ngIf="f.PhoneNumber.errors.maxlength">
+                    Phone Number length must be less than or equal to 10 characters long
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group mb-4">
-                <span class="input-group-addon"><i class="icon-lock"></i></span>
-                <input type="password" class="form-control" formControlName="Repeatpassword"placeholder="Repeat password">
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <span class="input-group-addon">@</span>
+                  <input type="password" class="form-control" formControlName="EmailId" placeholder="Email Id">
+                </div>
+                <div *ngIf="f.EmailId.invalid && (f.EmailId.dirty || f.EmailId.touched)" class="alert alert-danger">
+                  <div [hidden]="this.regdForm.controls['EmailId'].valid ">
+                    Please enter a valid email
+                  </div>
+                </div>
               </div>
-            </div>
-  
-              <button type="submit" class="btn btn-block btn-success">Create Account</button>
+
+              <div class="form-group">
+                <div class="input-group mb-4">
+                  <span class="input-group-addon"><i class="icon-lock"></i></span>
+                  <input type="password" class="form-control" formControlName="Password" placeholder="Password">
+                </div>
+                <div *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)" class="alert alert-danger">
+                  <div [hidden]="this.regdForm.controls['Password'].valid">
+                    Password is required
+                  </div>
+                </div>
+              </div>
+              <button type="submit" [disabled]="!regdForm.valid" class="btn btn-block btn-success">Create Account</button>
             </form>
-            </div>
-          
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-                </div>
-                <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                </div>
+          </div>
+
+          <div class="card-footer p-4">
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
               </div>
-           
+              <div class="col-6">
+                <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

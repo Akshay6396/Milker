@@ -9,6 +9,7 @@ import { OrdersComponent } from './milker/orders/orders.component';
 import { LoginComponent } from './authorization/login/login.component'
 import { RegisterComponent } from './authorization/register/register.component';
 import { AuthGuard } from './guards/auth.guard'
+import { ForgotComponent } from './authorization/forgot/forgot.component';
 
 
 export const routes: Routes = [
@@ -76,6 +77,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'forgot',
+    component: ForgotComponent
   }
 ];
 
