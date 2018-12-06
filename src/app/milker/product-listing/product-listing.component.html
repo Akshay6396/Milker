@@ -103,7 +103,7 @@
 <!-- Open confirm Modal -->
 
 <div bsModal #confirmModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
-  <form [formGroup]="productForm" (ngSubmit)="confirmDelete(currentItem?.id)">
+  <form (ngSubmit)="confirmDelete(currentItem?.id)">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -116,7 +116,7 @@
         <div class="modal-body">
           <p>Are you sure to remove {{currentItem?.firstName}}?</p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer  ">
           <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideModal()">Close</button>
           <button class="btn btn-danger" type="submit"> Confirm </button>
         </div>
