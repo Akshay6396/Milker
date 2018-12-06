@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {CustomValidators} from '../../helpers/custom-validators'
+import { CustomValidators } from '../../helpers/custom-validators'
 
 @Component({
   templateUrl: 'register.component.html'
