@@ -37,7 +37,6 @@ export class ForgotComponent implements OnInit {
       Password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
-    debugger;
     // reset login status
     // this.authenticationService.logout();
 
@@ -50,12 +49,10 @@ export class ForgotComponent implements OnInit {
   get r() { return this.reset.controls; }
 
   onSubmit() {
-    debugger;
     localStorage.setItem('otp', '123456');
     this.show = true;
   }
   onOtp() {
-    debugger;
     const Otp = localStorage.getItem('otp');
     const value = this.o.value;
     if (Otp == value) {
@@ -63,5 +60,9 @@ export class ForgotComponent implements OnInit {
     }
     this.OTP.reset()
 
+  }
+  changeNumber() {
+    this.confirm = false;
+    this.show = false
   }
 }
