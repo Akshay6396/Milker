@@ -3,7 +3,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { elementDef } from '@angular/core/src/view';
 import { ImageCroppedEvent } from 'ngx-image-cropper/src/image-cropper.component';
-
+import { PagerService } from '../../service/pager.service'
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 
 
@@ -26,6 +27,8 @@ export class ProductListingComponent implements OnInit {
   pageStart: number = 1;
   pages: number = 4;
   email = "";
+  pager: any = {};
+  pagedItems: any[];
 
   Element: any = [
     { id: 1, firstName: 'John', lastName: 'Akshay', email: 'john@gmail.com' },
@@ -65,9 +68,11 @@ export class ProductListingComponent implements OnInit {
     { id: 45, firstName: 'Tom', lastName: 'Paisa', email: 'tom@gmail.com' }
   ];
 
-  constructor() { }
+  constructor(private http: Http, private pagerService: PagerService) { }
 
   ngOnInit() {
+    this.setPage(1);
+
     this.productForm = new FormGroup({
       'id': new FormControl('', Validators.required),
       'firstName': new FormControl('', Validators.required),
@@ -118,7 +123,7 @@ export class ProductListingComponent implements OnInit {
       this.addItemModal.show();
     }
   }
-  get f() { return this. productForm.controls; }
+  get f() { return this.productForm.controls; }
   onAddSubmit() {
     debugger;
     let add = this.productForm.value;
@@ -144,5 +149,12 @@ export class ProductListingComponent implements OnInit {
   loadImageFailed() {
     // show message
   }
-}
+  setPage(page: number) {
+    debugger;
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.Element.length, page);
 
+    // get current page of items
+    this.pagedItems = this.Element.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+}
