@@ -12,7 +12,7 @@ import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { ReactiveFormsModule, FormsModule, } from '@angular/forms';
-import { AlertService, AuthenticationService, UserService } from './service/index';
+import { AlertService, AuthenticationService, UserService, PagerService } from './service/index';
 import { HttpClientModule, } from '@angular/common/http'
 
 
@@ -28,9 +28,10 @@ import { ModalModule } from 'ngx-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegisterComponent } from './authorization/register/register.component';
-import {AuthGuard} from './guards'
+import { AuthGuard } from './guards'
 import { SearchPipe } from './pipe/search.pipe';
 import { ForgotComponent } from './authorization/forgot/forgot.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { ForgotComponent } from './authorization/forgot/forgot.component';
     // ImageCropperModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
@@ -69,6 +71,7 @@ import { ForgotComponent } from './authorization/forgot/forgot.component';
     AuthenticationService,
     UserService,
     AuthGuard,
+    PagerService
   ],
   bootstrap: [AppComponent]
 })

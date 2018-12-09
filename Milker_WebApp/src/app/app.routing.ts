@@ -49,10 +49,16 @@ export const routes: Routes = [
       {
         path: 'productlisting',
         component: ProductListingComponent,
+        data: {
+          title: 'productlisting'
+        }
       },
       {
         path: 'orders',
-        component: OrdersComponent
+        component: OrdersComponent,
+        data: {
+          title: 'orders'
+        }
       }
     ]
   },

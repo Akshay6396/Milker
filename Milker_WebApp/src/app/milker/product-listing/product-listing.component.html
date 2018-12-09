@@ -19,7 +19,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of Element | customerEmailFilter:email;let i = index">
+            <tr *ngFor="let item of pagedItems | customerEmailFilter:email;let i = index">
               <td>{{item.firstName}}</td>
               <td>{{item.lastName}}</td>
               <td>{{item.email}}</td>
@@ -31,12 +31,30 @@
           </tbody>
         </table>
         <nav>
-          <ul class="pagination">
+          <!-- <ul class="pagination">
             <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}"><a (click)="prevPage()" href="#">Prev</a></li>
             <li *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
               <a (click)="setPage(page)" href="#">{{page}}</a>
             </li>
             <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}"><a (click)="nextPage()" href="#">Next</a></li>
+          </ul> -->
+
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+              <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+              <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+              <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
           </ul>
         </nav>
       </div>

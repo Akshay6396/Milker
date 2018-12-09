@@ -29,7 +29,7 @@
                 <div class="form-group">
                   <div class="input-group mb-4">
                     <span class="input-group-addon"><i class="icon-lock"></i></span>
-                    <input type="password" placeholder="Password" formControlName="password" class="form-control" /> 
+                    <input type="password" placeholder="Password" formControlName="password" class="form-control" />
                   </div>
                   <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
                     <div [hidden]="this.loginForm.controls['password'].valid">
@@ -44,7 +44,8 @@
                       <button type="submit" class="btn btn-primary px-4" [disabled]="!loginForm.valid">Login</button>
                     </div>
                     <div class="col-6 text-right">
-                      <button type="button" [routerLink]="['/forgotPassword']"class="btn btn-link px-0">Forgot password?</button>
+                      <button type="button" [routerLink]="['/forgotPassword']" class="btn btn-link px-0">Forgot
+                        password?</button>
                     </div>
                   </div>
                 </div>
