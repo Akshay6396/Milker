@@ -1,0 +1,13 @@
+[ 16/05/2018 20:55:52 ] PDFParser::ParseHeaderLine, no tokens in PDF input. in other words - it's empty.
+[ 16/05/2018 21:51:07 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1028 was not registered as written. probably means it was not written
+[ 16/05/2018 21:51:07 ] PDFWriter::EndPDF, Could not end PDF
+[ 16/05/2018 21:51:46 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1028 was not registered as written. probably means it was not written
+[ 16/05/2018 21:51:46 ] PDFWriter::EndPDF, Could not end PDF
+[ 16/05/2018 21:53:51 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1028 was not registered as written. probably means it was not written
+[ 16/05/2018 21:53:51 ] PDFWriter::EndPDF, Could not end PDF
+[ 16/05/2018 21:55:09 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1015 was not registered as written. probably means it was not written
+[ 16/05/2018 21:55:09 ] PDFWriter::EndPDF, Could not end PDF
+[ 17/05/2018 14:09:13 ] JPEGImageHandler::JPEGImageHandler. Failed to parse JPG file, ./downloads/1526542244_singature.png
+[ 17/05/2018 14:09:13 ] JPEGImageHandler::CreateImageXObjectJPGFile, unable to retrieve image information for ./downloads/1526542244_singature.png
+[ 17/05/2018 15:06:13 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1017 was not registered as written. probably means it was not written
+[ 17/05/2018 15:06:13 ] PDFWriter::EndPDF, Could not end PDF
