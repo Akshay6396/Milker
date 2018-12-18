@@ -56,7 +56,7 @@ define({ "api": [
     "description": "<p>Register User Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/Register"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/Register"
       }
     ],
     "version": "0.0.0",
@@ -92,7 +92,7 @@ define({ "api": [
     "description": "<p>Request OTP Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/RequestOTP"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/RequestOTP"
       }
     ],
     "version": "0.0.0",
@@ -128,7 +128,7 @@ define({ "api": [
     "description": "<p>Reset Password User Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/ResetPassword"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/ResetPassword"
       }
     ],
     "version": "0.0.0",
@@ -164,7 +164,7 @@ define({ "api": [
     "description": "<p>Login User Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/login"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/login"
       }
     ],
     "version": "0.0.0",
@@ -200,7 +200,7 @@ define({ "api": [
     "description": "<p>Verify Code Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/VerifyCode"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/VerifyCode"
       }
     ],
     "version": "0.0.0",
@@ -229,7 +229,7 @@ define({ "api": [
     "description": "<p>Get Milker Orders Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders"
       }
     ],
     "version": "0.0.0",
@@ -265,7 +265,7 @@ define({ "api": [
     "description": "<p>Get User Dashboard Data Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData"
       }
     ],
     "version": "0.0.0",
@@ -350,7 +350,7 @@ define({ "api": [
     "description": "<p>Update Address Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress"
       }
     ],
     "version": "0.0.0",
