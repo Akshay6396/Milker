@@ -78,13 +78,6 @@ define({ "api": [
             "optional": false,
             "field": "PhoneNumber",
             "description": "<p>Phone Number</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "VerificationCode",
-            "description": "<p>Verification Code</p>"
           }
         ]
       }

@@ -107,12 +107,6 @@ exports.Register = function (req, res) {
             resModel.Data = {};
             res.json(resModel);
             break;
-          case 2:
-            resModel.Status = false;
-            resModel.Message = userModel.ExMessage;
-            resModel.Data = {};
-            res.json(resModel);
-            break;
           case -2:
             resModel.Status = false;
             resModel.Message = userModel.ExMessage;
@@ -184,16 +178,16 @@ exports.VerifyCode = function (req, res) {
  *  @apiName Request OTP
  *  @apiGroup Account
  *  @apiParam {String}  PhoneNumber Phone Number
- *  @apiParam {String}  VerificationCode Verification Code
  *  @apiDescription Request OTP Service..
  *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/RequestOTP
  */
 exports.RequestOTP = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_RequestOTP ?,?', [req.body.PhoneNumber, req.body.VerificationCode]).then(function (spRes) {
+    const otp = randomstring.generate(6);
+    _dbContaxt.getContext().raw('Exec M_RequestOTP ?,?', [req.body.PhoneNumber, otp]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
         resModel.Status = true;
-        TextLocal.SendOtp(req.body.PhoneNumber, req.body.VerificationCode);
+        TextLocal.SendOtp(req.body.PhoneNumber, otp);
         resModel.Message = 'Success';
         resModel.Data = spRes[0];
         res.json(resModel);
