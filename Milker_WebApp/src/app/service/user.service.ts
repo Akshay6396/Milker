@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
@@ -17,7 +17,8 @@ export class UserService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        debugger;
+        return this.http.post(`${environment.apiUrl}account/Register`, user);
     }
 
     update(user: User) {
@@ -30,4 +31,18 @@ export class UserService {
     getProducts(userid: string) {
         return this.http.post(`${environment.apiUrl}/account/GetMilkerOrders/`, userid)
     }
+    requestOTP(id: number) {
+        debugger;
+        return this.http.post(`${environment.apiUrl}account/RequestOTP`, id)
+    }
+    verifyCode(verificationCode: any, phoneNumner: any) {
+        // var payload = new FormData();
+        // payload.append('PhoneNumber', phoneNumner)
+        // payload.append('VerificationCode', verificationCode);
+        var payload = {
+            phoneNumner, verificationCode
+        }
+        return this.http.post(`${environment.apiUrl}account/VerifyCode`, payload)
+    }
+
 }

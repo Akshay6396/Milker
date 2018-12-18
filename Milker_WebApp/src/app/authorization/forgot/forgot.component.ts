@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AlertService, AuthenticationService } from '../../service/index';
+import { AlertService, AuthenticationService, UserService } from '../../service/index';
 
 @Component({ templateUrl: 'forgot.component.html' })
 
@@ -14,15 +14,18 @@ export class ForgotComponent implements OnInit {
   returnUrl: string;
   show: boolean = false;
   confirm: boolean = false;
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService, ) { }
+    private alertService: AlertService,
+    private userService: UserService) { }
 
   ngOnInit() {
+    debugger;
     if (localStorage.getItem('token')) {
       this.router.navigate(['/productlisting']);
     }
@@ -49,16 +52,51 @@ export class ForgotComponent implements OnInit {
   get r() { return this.reset.controls; }
 
   onSubmit() {
-    localStorage.setItem('otp', '123456');
-    this.show = true;
+    this.loading = true;
+    this.error = '';
+    this.userService.requestOTP(this.forgot.value)
+      .toPromise()
+      .then(val => {
+        if (val['Data']['UserId']) {
+          this.show = true;
+        }
+        else {
+          this.alertService.error(val['Data']['ExMessage']);
+          this.error = val['Data']['ExMessage']
+        }
+        this.loading = false;
+      },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        })
   }
+
   onOtp() {
-    const Otp = localStorage.getItem('otp');
-    const value = this.o.value;
-    if (Otp == value) {
-      this.confirm = true
-    }
-    this.OTP.reset()
+    // const Otp = localStorage.getItem('otp');
+    // const value = this.o.value;
+    // if (Otp == value) {
+    //   this.confirm = true
+    // }
+    // this.OTP.reset()
+    this.loading = true;
+    this.error = '';
+    this.userService.verifyCode(this.OTP.value , this.forgot.value)
+      .toPromise()
+      .then(val => {
+        if (val['Data']['UserId']) {
+          this.show = true;
+        }
+        else {
+          this.alertService.error(val['Data']['ExMessage']);
+          this.error = val['Data']['ExMessage']
+        }
+        this.loading = false;
+      },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        })
 
   }
   changeNumber() {

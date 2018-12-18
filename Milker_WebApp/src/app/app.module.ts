@@ -32,6 +32,7 @@ import { AuthGuard } from './guards'
 import { SearchPipe } from './pipe/search.pipe';
 import { ForgotComponent } from './authorization/forgot/forgot.component';
 import { HttpModule } from '@angular/http';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { HttpModule } from '@angular/http';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    HttpModule
+    HttpModule,
+    NgxLoadingModule.forRoot({})
   ],
   declarations: [
     AppComponent,

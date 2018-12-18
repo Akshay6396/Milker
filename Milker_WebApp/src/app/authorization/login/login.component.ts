@@ -7,9 +7,10 @@ import { AlertService, AuthenticationService } from '../../service/index';
 
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    loading = false;
-    submitted = false;
     returnUrl: string;
+    error = '';
+    submitted: boolean = false;
+    loading: boolean = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
 
         this.loginForm = this.formBuilder.group({
             PhoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
-            password: ['',Validators.required]
+            password: ['', Validators.required]
         });
         // reset login status
         // this.authenticationService.logout();
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
         // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-        // convenience getter for easy access to form fields
+    // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
     keyPress(event: any) {
@@ -47,31 +48,36 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        localStorage.setItem('token', 'akshay');
-        this.router.navigate(['/productlisting']);
-        // this.submitted = true;
+        debugger;
+        // localStorage.setItem('token', 'akshay');
+        // this.router.navigate(['/productlisting']);
+
+        this.submitted = true;
+        this.error = '';
 
         // stop here if form is invalid
-        //     if (this.loginForm.invalid) {
-        //         return;
-        //     }
-        //     this.loading = true;
-        //     this.authenticationService.login(this.f.PhoneNumber.value, this.f.password.value)
-        //         .subscribe(
-        //             result => {
-        //                 this.loading = false;
-        //                 if (result.Status) {
-        //                     localStorage.setItem('token', 'akshay');
-        //                     this.router.navigate(['/productlisting']);
-        //                     this.submitted = true;
-        //                 } else {
-        //                     this.alertService.error(result.Message, true);
-        //                 }
+        if (this.loginForm.invalid) {
+            return;
+        }
+        this.loading = true;
+        this.authenticationService.login(this.f.PhoneNumber.value, this.f.password.value)
+            .subscribe(
+                result => {
+                    this.loading = false;
+                    debugger
+                    if (result.Status) {
+                        this.router.navigate(['/productlisting']);
+                        this.submitted = true;
+                    } else {
+                        debugger
+                        this.alertService.error(result.Message, true);
+                        this.error = result.Message;
+                    }
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
 
-        //             },
-        //             error => {
-        //                 this.alertService.error(error);
-        //                 this.loading = false;
-        //             })
+                })
     }
 }

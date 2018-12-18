@@ -24,6 +24,8 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
                 <button type="submit" [disabled]="!forgot.valid" class="btn btn-block btn-success">Send OTP</button>
               </form>
             </div>

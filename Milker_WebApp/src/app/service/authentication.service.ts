@@ -14,7 +14,7 @@ export class AuthenticationService {
 
     login(phoneNumber: number, password: string) {
         debugger;
-        return this.http.post<any>(`${environment.apiUrl}/account/login`, { PhoneNumber: phoneNumber, Password: password })
+        return this.http.post<any>(`${environment.apiUrl}account/login`, { PhoneNumber: phoneNumber, Password: password })
             .pipe(map(result => {
                 debugger;
                 // return result;

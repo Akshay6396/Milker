@@ -6,8 +6,13 @@
           <div class="card-body p-4">
             <form [formGroup]="regdForm" (ngSubmit)="onSubmit()">
               <h1>Register</h1>
-              <p class="text-muted">Create your account</p>
-
+              <p class="text-muted mb-0">Create your account</p>
+              <div class="form-group">
+                <select class="form-control" id="userType" formControlName="UserTypeID">
+                  <option value='' disabled selected>Select User Type</option>
+                  <option *ngFor="let user of userType" [value]="user.id">{{user.name}}</option>
+                </select>
+              </div>
               <div class="form-group">
                 <div class="input-group mb-3">
                   <span class="input-group-addon"><i class="icon-user"></i></span>
@@ -72,18 +77,21 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+              <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+              <!-- <div class="form-group">
                 <div class="input-group mb-4">
                   <span class="input-group-addon"><i class="icon-lock"></i></span>
                   <input type="password" class="form-control" formControlName="ConfirmPassword" placeholder=" Confirm Password ">
                 </div>
                 <div *ngIf="f.ConfirmPassword.invalid && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)" class="alert alert-danger">
                   <div [hidden]="this.regdForm.controls['ConfirmPassword'].valid">
-                    Confirm Password 
+                    Confirm Password
                   </div>
                 </div>
-              </div>
-              <button type="submit" [disabled]="!regdForm.valid" class="btn btn-block btn-success" [disabled]="! isValid">Create Account</button>
+              </div> -->
+              <button type="submit" [disabled]="!regdForm.valid" class="btn btn-block btn-success" [disabled]="! isValid">Create
+                Account</button>
             </form>
           </div>
 
