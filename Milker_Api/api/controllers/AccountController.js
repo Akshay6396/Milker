@@ -17,7 +17,7 @@ var resModel = {
  *  @apiParam {String}  PhoneNumber Phone Number.
  *  @apiParam {String}  Password Password.
  *  @apiDescription Login User Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/login
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/login
  */
 exports.Login = function (req, res) {
   try {
@@ -55,6 +55,10 @@ exports.Login = function (req, res) {
       }
     }).catch(function (err) {
       console.log(err);
+      resModel.Status = false;
+      resModel.Message = err.message;
+      resModel.Data = err;
+      res.json(resModel);
       throw err;
     }).finally(function (err) {
       _dbContaxt.destroyContext();
@@ -78,7 +82,7 @@ exports.Login = function (req, res) {
  *  @apiParam {String}  Password Password
  *  @apiParam {Number}  UserTypeID User Type Id
  *  @apiDescription Register User Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/Register
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/Register
  */
 exports.Register = function (req, res) {
   try {
@@ -98,12 +102,6 @@ exports.Register = function (req, res) {
             res.json(resModel);
             break;
           case -1:
-            resModel.Status = false;
-            resModel.Message = userModel.ExMessage;
-            resModel.Data = {};
-            res.json(resModel);
-            break;
-          case 2:
             resModel.Status = false;
             resModel.Message = userModel.ExMessage;
             resModel.Data = {};
@@ -143,7 +141,7 @@ exports.Register = function (req, res) {
  *  @apiParam {String}  PhoneNumber Phone Number
  *  @apiParam {String}  VerificationCode Verification Code
  *  @apiDescription Verify Code Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/VerifyCode
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/VerifyCode
  */
 exports.VerifyCode = function (req, res) {
   try {
@@ -180,16 +178,16 @@ exports.VerifyCode = function (req, res) {
  *  @apiName Request OTP
  *  @apiGroup Account
  *  @apiParam {String}  PhoneNumber Phone Number
- *  @apiParam {String}  VerificationCode Verification Code
  *  @apiDescription Request OTP Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/RequestOTP
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/RequestOTP
  */
 exports.RequestOTP = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_RequestOTP ?,?', [req.body.PhoneNumber, req.body.VerificationCode]).then(function (spRes) {
+    const otp = randomstring.generate(6);
+    _dbContaxt.getContext().raw('Exec M_RequestOTP ?,?', [req.body.PhoneNumber, otp]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
         resModel.Status = true;
-        TextLocal.SendOtp(req.body.PhoneNumber, req.body.VerificationCode);
+        TextLocal.SendOtp(req.body.PhoneNumber, otp);
         resModel.Message = 'Success';
         resModel.Data = spRes[0];
         res.json(resModel);
@@ -218,7 +216,7 @@ exports.RequestOTP = function (req, res) {
  *  @apiParam {String}  PhoneNumber Phone Number
  *  @apiParam {String}  Password Password
  *  @apiDescription Reset Password User Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/account/ResetPassword
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/account/ResetPassword
  */
 exports.ResetPassword = function (req, res) {
   try {

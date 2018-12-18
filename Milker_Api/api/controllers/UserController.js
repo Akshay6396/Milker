@@ -26,7 +26,7 @@ var resModel = {
  *  @apiParam {String}  Lat Lattitude
  *  @apiParam {String}  Long Longitude
  *  @apiDescription Update Address Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress
  */
 exports.UpdateAddress = function (req, res) {
   try {
@@ -72,7 +72,7 @@ exports.UpdateAddress = function (req, res) {
  *  @apiParam {String}  Lat Latitude
  *  @apiParam {String}  Long Longitude
  *  @apiDescription Get User Dashboard Data Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData
  */
 exports.GetUserDashboardData = function (req, res) {
   try {
@@ -128,7 +128,7 @@ exports.GetUserDashboardData = function (req, res) {
  
  *  @apiParam {String}  UserId User Id
  *  @apiDescription Get Milker Orders Service..
- *  @apiSampleRequest http://ec2-13-57-230-164.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders
  */
 exports.GetMilkerOrders = function (req, res) {
   try {

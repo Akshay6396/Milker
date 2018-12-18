@@ -20,8 +20,7 @@ module.exports.VerifyCodeModel = {
 };
 
 module.exports.RequestOTPModel = {
-  PhoneNumber: Joi.string().min(2).max(10).required(),
-  VerificationCode: Joi.string().required().min(2).max(10)
+  PhoneNumber: Joi.string().min(2).max(10).required()
 };
 
 module.exports.ResetPasswordModel = {
