@@ -25,7 +25,6 @@ export class ForgotComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    debugger;
     if (localStorage.getItem('token')) {
       this.router.navigate(['/productlisting']);
     }
@@ -73,32 +72,23 @@ export class ForgotComponent implements OnInit {
   }
 
   onOtp() {
-    // const Otp = localStorage.getItem('otp');
-    // const value = this.o.value;
-    // if (Otp == value) {
-    //   this.confirm = true
-    // }
-    // this.OTP.reset()
+    debugger
     this.loading = true;
     this.error = '';
-    this.userService.verifyCode(this.OTP.value , this.forgot.value)
+    var VerificationCode = this.OTP.controls.Otp.value;
+    var PhoneNumber = this.forgot.controls.PhoneNumber.value;
+    var data =[{PhoneNumber},{VerificationCode}]
+    this.userService.verifyCode(data)
       .toPromise()
-      .then(val => {
-        if (val['Data']['UserId']) {
-          this.show = true;
-        }
-        else {
-          this.alertService.error(val['Data']['ExMessage']);
-          this.error = val['Data']['ExMessage']
-        }
-        this.loading = false;
-      },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        })
-
+      .then(response => response  )
+      // this.show = true;
+      // this.loading = false;
+    error => {
+      this.alertService.error(error);
+      this.loading = false;
+    }
   }
+
   changeNumber() {
     this.confirm = false;
     this.show = false
