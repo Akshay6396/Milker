@@ -74,45 +74,32 @@ exports.UpdateAddress = function (req, res) {
  *  @apiDescription Get User Dashboard Data Service..
  *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData
  */
-exports.GetUserDashboardData = function (req, res) {
+exports.GetUserDashboardData = async function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_GetProductCategory').then(function (spRes) {
-      if (spRes != null && spRes.length > 0) {
-        var ProductCategories = spRes;
-        _dbContaxt.getContext().raw('Exec M_GetNearByMilkers', [req.body.Lat, req.body.Long]).then(function (spRes) {
-          if (spRes != null && spRes.length > 0) {
-            var NearbyMilkers = spRes; //spRes[0];
-            resModel.Data = {};
-            resModel.Status = true;
-            if (userModel.length > 0) {
-              resModel.Message = 'Success';
-            } else {
-              resModel.Message = 'No records found';
-            }
-            resModel.Data = userModel;
-            res.json(resModel);
-          } else {
-            resModel.Status = false;
-            resModel.Message = 'No Agency found!';
-            resModel.Data = {};
-            res.json(resModel);
-          }
-        }).catch(function (err) {
-          throw err;
-        }).finally(function (err) {
-          _dbContaxt.destroyContext();
-        });
-      } else {
-        resModel.Status = false;
-        resModel.Message = 'No Agency found!';
-        resModel.Data = {};
-        res.json(resModel);
-      }
-    }).catch(function (err) {
-      throw err;
-    }).finally(function (err) {
-      _dbContaxt.destroyContext();
+    let dashboardData = {};
+    var productCat = await _dbContaxt.getContext().raw('Exec M_GetProductCategory');  //.then(function (spRes) {
+    var products = await _dbContaxt.getContext().raw('Exec M_GetProduct');  //.then(function (spRes) {
+    let Products = [];
+    productCat.forEach(element => {
+      element.product = products.filter(p => p.CategoryId === element.Id)
+      Products.push(element);
     });
+
+    if (productCat.length > 0) {
+      dashboardData.Products = Products;
+    } else {
+      dashboardData.Products = [];
+    }
+    var nearbyMilker = await _dbContaxt.getContext().raw('Exec M_GetNearByMilkers ?,?', [req.body.Lat, req.body.Long]);//.then(function (spRes) {
+    if (nearbyMilker.length > 0) {
+      dashboardData.NearbyMilkers = nearbyMilker;
+    } else {
+      dashboardData.NearbyMilkers = [];
+    }
+    resModel.Status = true;
+    resModel.Message = '';
+    resModel.Data = dashboardData;
+    res.json(resModel);
   } catch (err) {
     resModel.Status = false;
     resModel.Message = 'Error occured during execution';
@@ -127,12 +114,13 @@ exports.GetUserDashboardData = function (req, res) {
  *  @apiGroup User
  
  *  @apiParam {String}  UserId User Id
+ *  @apiParam {Bool}  IsMilker Is Milker
  *  @apiDescription Get Milker Orders Service..
  *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders
  */
 exports.GetMilkerOrders = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_UpdateAddress ?,?,?,?,?,?,?,?,?', [req.body.UserId, req.body.Address, req.body.SubLocality, req.body.Locality, req.body.SubAdmin, req.body.Admin, req.body.PostalCode, req.body.Lat, req.body.Long]).then(function (spRes) {
+    _dbContaxt.getContext().raw('Exec M_GetOrder ?,?', [req.body.UserId, req.body.IsMilker]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
         var userModel = spRes; //spRes[0];
         resModel.Data = {};
@@ -146,7 +134,7 @@ exports.GetMilkerOrders = function (req, res) {
         res.json(resModel);
       } else {
         resModel.Status = false;
-        resModel.Message = 'No Agency found!';
+        resModel.Message = 'No Orders found!';
         resModel.Data = {};
         res.json(resModel);
       }

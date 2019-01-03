@@ -72,21 +72,26 @@ export class ForgotComponent implements OnInit {
   }
 
   onOtp() {
-    debugger
     this.loading = true;
-    this.error = '';
-    var VerificationCode = this.OTP.controls.Otp.value;
-    var PhoneNumber = this.forgot.controls.PhoneNumber.value;
-    var data =[{PhoneNumber},{VerificationCode}]
-    this.userService.verifyCode(data)
-      .toPromise()
-      .then(response => response  )
-      // this.show = true;
-      // this.loading = false;
-    error => {
-      this.alertService.error(error);
-      this.loading = false;
-    }
+    this.userService.verifyCode(this.forgot.value, this.OTP.value)
+      .subscribe(
+        result => {
+          if (result.Status) {
+            localStorage.setItem('UserModel', JSON.stringify(result.Data));
+          } else {
+          }
+        },
+        error => {
+          //Validation error
+          if (error.status == 422) {
+            // this._errorMessage = "There was an error on submission. Please check again.";
+            // let errorFields = JSON.parse(error.Data);
+            let errorFields = error.Data;
+          } else {
+            //this._errorMessage = error.Data[0];
+          }
+        }
+      );
   }
 
   changeNumber() {

@@ -202,6 +202,150 @@
   },
   {
     "type": "post",
+    "url": "/api/product/AddProduct",
+    "title": "Add Product",
+    "name": "Add_Product",
+    "group": "Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Name",
+            "description": "<p>Product Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Description",
+            "description": "<p>Product Description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "BrandId",
+            "description": "<p>Product Brand Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "CategoryId",
+            "description": "<p>Product Category Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "AddedById",
+            "description": "<p>Added By Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Decimal",
+            "optional": false,
+            "field": "SalePrice",
+            "description": "<p>Sale Price</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "Quantity",
+            "description": "<p>Product Quantity</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "UnitId",
+            "description": "<p>Product Unit Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Decimal",
+            "optional": false,
+            "field": "MRP",
+            "description": "<p>MRP Unit</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ProductURL",
+            "description": "<p>Product Image URL</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Add Product Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/AddProduct"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/ProductController.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/api/product/GetMilkerProductById",
+    "title": "Get Milker Product By Id",
+    "name": "Get_Milker_Product_By_Id",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "CategoryId",
+            "description": "<p>Product Category Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "MilkerId",
+            "description": "<p>Milker Id</p>"
+          }
+        ]
+      }
+    },
+    "group": "Product",
+    "description": "<p>Get Milker Product By Id Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/GetMilkerProductById"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/ProductController.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/api/product/ProductMasterData",
+    "title": "Product Master Data",
+    "name": "Product_Master_Data",
+    "group": "Product",
+    "description": "<p>Product Master Data Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/ProductMasterData"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/ProductController.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
     "url": "/api/user/GetMilkerOrders",
     "title": "Get Milker Orders",
     "name": "Get_Get_Milker_Orders",
@@ -215,6 +359,13 @@
             "optional": false,
             "field": "UserId",
             "description": "<p>User Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Bool",
+            "optional": false,
+            "field": "IsMilker",
+            "description": "<p>Is Milker</p>"
           }
         ]
       }
