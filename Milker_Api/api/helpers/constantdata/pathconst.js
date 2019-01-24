@@ -5,7 +5,8 @@ exports.PagesPath = {
 }
 exports.ControllersPath = {
       AccountController: appRoot + "/api/controllers/AccountController.js",
-      UserController: appRoot + "/api/controllers/UserController.js"
+      UserController: appRoot + "/api/controllers/UserController.js",
+      ProductController: appRoot + "/api/controllers/ProductController.js"
 }
 
 exports.FilesPath = {
@@ -19,5 +20,6 @@ exports.FilesPath = {
 
 exports.ReqModelsPath = {
       AccountModel: appRoot + "/api/models/reqmodels/AccountModel.js",
-      UserModel: appRoot + "/api/models/reqmodels/UserModel.js"
+      UserModel: appRoot + "/api/models/reqmodels/UserModel.js",
+      ProductModel: appRoot + "/api/models/reqmodels/ProductModel.js"
 }

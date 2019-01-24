@@ -4,6 +4,9 @@ var AccountModel = require(_pathconst.ReqModelsPath.AccountModel)
 var UserCntrl = require(_pathconst.ControllersPath.UserController)
 var UserModel = require(_pathconst.ReqModelsPath.UserModel)
 
+var ProductCntrl = require(_pathconst.ControllersPath.ProductController)
+var ProductModel = require(_pathconst.ReqModelsPath.ProductModel)
+
 var AuthHelper = require(_pathconst.FilesPath.AuthHelper)
 var multer = require('multer');
 var upload = multer({
@@ -27,6 +30,13 @@ module.exports = function (app, validate) {
   app.post('/api/user/GetMilkerOrders', validate.body(UserModel.GetMilkerOrdersModal), UserCntrl.GetMilkerOrders)
 
   // User Routes Ends
+
+  // Product Routes Starts
+  app.post('/api/product/AddProduct', validate.body(ProductModel.AddProductModal), ProductCntrl.AddProduct)
+  app.post('/api/product/ProductMasterData', ProductCntrl.ProductMasterData)
+  app.post('/api/product/GetMilkerProductById', validate.body(ProductModel.GetMilkerProductByIdModal), ProductCntrl.GetMilkerProductById)
+
+  // Product Routes Ends
   app.post('/api/PDF/UploadImageOnServer', upload.single('upload'), (req, res) => {
     console.log("downloading");
     var tmp_path = req.file.path;
