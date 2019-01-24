@@ -1,6 +1,6 @@
 var Joi = require('joi');
 
-module.exports.UpdateAddressModal = {
+module.exports.AddAddressModal = {
   UserId: Joi.number().required(),
   Address: Joi.string().required(),
   SubLocality: Joi.any(),
@@ -20,4 +20,12 @@ module.exports.GetUserDashboardDataModal = {
 module.exports.GetMilkerOrdersModal = {
   UserId: Joi.number().required(),
   IsMilker: Joi.bool().required()
+};
+
+module.exports.UserAddressListModal = {
+  UserId: Joi.number().required()
+};
+
+module.exports.DeleteAddressModal = {
+  Id: Joi.number().required()
 };

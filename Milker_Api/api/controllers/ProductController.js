@@ -12,11 +12,12 @@ var resModel = {
 
 
 /**
- * @api {post} /api/product/AddProduct Add Product
+ * @api {post} /api/product/AddUpdateProduct Add and update Product
  *  @apiName Add Product
  *  @apiGroup Product
  
- *  @apiParam {Number}  Name Product Name
+ *  @apiParam {Number}  Id Product Id
+ *  @apiParam {String}  Name Product Name
  *  @apiParam {String}  Description Product Description
  *  @apiParam {Int}  BrandId Product Brand Id
  *  @apiParam {Int}  CategoryId Product Category Id
@@ -27,11 +28,11 @@ var resModel = {
  *  @apiParam {Decimal}  MRP MRP Unit
  *  @apiParam {String}  ProductURL Product Image URL
  *  @apiDescription Add Product Service..
- *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/AddProduct
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/AddUpdateProduct
  */
-exports.AddProduct = function (req, res) {
+exports.AddUpdateProduct = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_AddProduct ?,?,?,?,?,?,?,?,?,?', [req.body.Name, req.body.Description,
+    _dbContaxt.getContext().raw('Exec M_AddUpdateProduct ?,?,?,?,?,?,?,?,?,?,?', [req.body.Id, req.body.Name, req.body.Description,
     req.body.BrandId, req.body.CategoryId, req.body.AddedById, req.body.SalePrice, req.body.Quantity,
     req.body.UnitId, req.body.MRP, req.body.ProductURL]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
@@ -47,7 +48,7 @@ exports.AddProduct = function (req, res) {
         res.json(resModel);
       } else {
         resModel.Status = false;
-        resModel.Message = 'No Agency found!';
+        resModel.Message = 'No Product found!';
         resModel.Data = {};
         res.json(resModel);
       }

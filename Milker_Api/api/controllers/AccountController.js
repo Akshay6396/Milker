@@ -148,16 +148,34 @@ exports.VerifyCode = function (req, res) {
     _dbContaxt.getContext().raw('Exec M_VerifyCode ?,?', [req.body.PhoneNumber, req.body.VerificationCode]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
         var userModel = spRes[0];
-        resModel.Status = true;
-        resModel.Message = 'Success';
-        userModel.token = AuthHelper.createJWToken(userModel);
-        resModel.Data = userModel;
-        res.json(resModel);
-      } else {
-        resModel.Status = false;
-        resModel.Message = spRes[0].ExMessage;
         resModel.Data = {};
-        res.json(resModel);
+        switch (userModel.ResStatus) {
+          case 1:
+            userModel.token = AuthHelper.createJWToken(userModel);
+            resModel.Status = true;
+            resModel.Message = 'Success';
+            resModel.Data = userModel;
+            res.json(resModel);
+            break;
+          case -1:
+            resModel.Status = false;
+            resModel.Message = 'Error occured during execution';
+            resModel.Data = {};
+            res.json(resModel);
+            break;
+          case 2:
+            resModel.Status = false;
+            resModel.Message = userModel.ExMessage;
+            resModel.Data = {};
+            res.json(resModel);
+            break;
+          default:
+            resModel.Status = false;
+            resModel.Message = 'Error occured during execution';
+            resModel.Data = {};
+            res.json(resModel);
+            break;
+        }
       }
     }).catch(function (err) {
       throw err;

@@ -25,14 +25,16 @@ module.exports = function (app, validate) {
 
   // User Routes Starts
   // AuthHelper.authorize
-  app.post('/api/user/UpdateAddress', validate.body(UserModel.UpdateAddressModal), UserCntrl.UpdateAddress)
+  app.post('/api/user/AddAddress', validate.body(UserModel.AddAddressModal), UserCntrl.AddAddress)
+  app.post('/api/user/DeleteAddress', validate.body(UserModel.DeleteAddressModal), UserCntrl.DeleteAddress)
+  app.post('/api/user/UserAddressList', validate.body(UserModel.UserAddressListModal), UserCntrl.UserAddressList)
   app.post('/api/user/GetUserDashboardData', validate.body(UserModel.GetUserDashboardDataModal), UserCntrl.GetUserDashboardData)
   app.post('/api/user/GetMilkerOrders', validate.body(UserModel.GetMilkerOrdersModal), UserCntrl.GetMilkerOrders)
 
   // User Routes Ends
 
   // Product Routes Starts
-  app.post('/api/product/AddProduct', validate.body(ProductModel.AddProductModal), ProductCntrl.AddProduct)
+  app.post('/api/product/AddUpdateProduct', validate.body(ProductModel.AddUpdateProductModal), ProductCntrl.AddUpdateProduct)
   app.post('/api/product/ProductMasterData', ProductCntrl.ProductMasterData)
   app.post('/api/product/GetMilkerProductById', validate.body(ProductModel.GetMilkerProductByIdModal), ProductCntrl.GetMilkerProductById)
 

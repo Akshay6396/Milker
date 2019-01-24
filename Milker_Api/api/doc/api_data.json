@@ -202,8 +202,8 @@
   },
   {
     "type": "post",
-    "url": "/api/product/AddProduct",
-    "title": "Add Product",
+    "url": "/api/product/AddUpdateProduct",
+    "title": "Add and update Product",
     "name": "Add_Product",
     "group": "Product",
     "parameter": {
@@ -212,6 +212,13 @@
           {
             "group": "Parameter",
             "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>Product Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
             "optional": false,
             "field": "Name",
             "description": "<p>Product Name</p>"
@@ -285,7 +292,7 @@
     "description": "<p>Add Product Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/AddProduct"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/product/AddUpdateProduct"
       }
     ],
     "version": "0.0.0",
@@ -343,6 +350,120 @@
     "version": "0.0.0",
     "filename": "api/controllers/ProductController.js",
     "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/AddAddress",
+    "title": "Add Address",
+    "name": "Add_Address",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "UserId",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Address",
+            "description": "<p>Address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "SubLocality",
+            "description": "<p>SubLocality</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Locality",
+            "description": "<p>Locality</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "SubAdmin",
+            "description": "<p>SubAdmin</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Admin",
+            "description": "<p>Admin</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "PostalCode",
+            "description": "<p>Postal Code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Lat",
+            "description": "<p>Lattitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Long",
+            "description": "<p>Longitude</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Update Address Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/AddAddress"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/UserController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/DeleteAddress",
+    "title": "Delete Address",
+    "name": "Delete_Address",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>Address Id</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Delete Address Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/DeleteAddress"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/UserController.js",
+    "groupTitle": "User"
   },
   {
     "type": "post",
@@ -418,9 +539,9 @@
   },
   {
     "type": "post",
-    "url": "/api/user/UpdateAddress",
-    "title": "Update Address",
-    "name": "Update_Address",
+    "url": "/api/user/UserAddressList",
+    "title": "User Address List",
+    "name": "User_Address_List",
     "group": "User",
     "parameter": {
       "fields": {
@@ -431,70 +552,14 @@
             "optional": false,
             "field": "UserId",
             "description": "<p>User Id</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "Address",
-            "description": "<p>Address</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "SubLocality",
-            "description": "<p>SubLocality</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "Locality",
-            "description": "<p>Locality</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "SubAdmin",
-            "description": "<p>SubAdmin</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "Admin",
-            "description": "<p>Admin</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "PostalCode",
-            "description": "<p>Postal Code</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "Lat",
-            "description": "<p>Lattitude</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "Long",
-            "description": "<p>Longitude</p>"
           }
         ]
       }
     },
-    "description": "<p>Update Address Service..</p>",
+    "description": "<p>User Address List Service..</p>",
     "sampleRequest": [
       {
-        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress"
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UserAddressList"
       }
     ],
     "version": "0.0.0",

@@ -1,6 +1,7 @@
 var Joi = require('joi');
 
-module.exports.AddProductModal = {
+module.exports.AddUpdateProductModal = {
+  Id: Joi.allow(null),
   Name: Joi.string().required(),
   Description: Joi.string().required(),
   BrandId: Joi.number(),

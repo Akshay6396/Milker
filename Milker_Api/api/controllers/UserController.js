@@ -12,8 +12,8 @@ var resModel = {
 
 
 /**
- * @api {post} /api/user/UpdateAddress Update Address
- *  @apiName Update Address
+ * @api {post} /api/user/AddAddress Add Address
+ *  @apiName Add Address
  *  @apiGroup User
  
  *  @apiParam {Number}  UserId User Id
@@ -26,11 +26,11 @@ var resModel = {
  *  @apiParam {String}  Lat Lattitude
  *  @apiParam {String}  Long Longitude
  *  @apiDescription Update Address Service..
- *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UpdateAddress
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/AddAddress
  */
-exports.UpdateAddress = function (req, res) {
+exports.AddAddress = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_UpdateAddress ?,?,?,?,?,?,?,?,?', [req.body.UserId, req.body.Address, req.body.SubLocality, req.body.Locality, req.body.SubAdmin, req.body.Admin, req.body.PostalCode, req.body.Lat, req.body.Long]).then(function (spRes) {
+    _dbContaxt.getContext().raw('Exec M_AddAddress ?,?,?,?,?,?,?,?,?', [req.body.UserId, req.body.Address, req.body.SubLocality, req.body.Locality, req.body.SubAdmin, req.body.Admin, req.body.PostalCode, req.body.Lat, req.body.Long]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
         var userModel = spRes; //spRes[0];
         resModel.Data = {};
@@ -63,6 +63,108 @@ exports.UpdateAddress = function (req, res) {
     res.json(resModel);
   }
 };
+
+
+/**
+ * @api {post} /api/user/DeleteAddress Delete Address
+ *  @apiName Delete Address
+ *  @apiGroup User
+ 
+ *  @apiParam {Number}  Id Address Id
+ *  @apiDescription Delete Address Service..
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/DeleteAddress
+ */
+exports.DeleteAddress = function (req, res) {
+  try {
+    _dbContaxt.getContext().raw('Exec M_DeleteAddress ?', [req.body.Id]).then(function (spRes) {
+      if (spRes != null && spRes.length > 0) {
+        var userModel = spRes[0];
+        resModel.Data = {};
+        switch (userModel.ResStatus) {
+          case 1:
+            resModel.Status = true;
+            resModel.Message = 'Success';
+            resModel.Data = {};
+            break;
+          case -1:
+            resModel.Status = false;
+            resModel.Message = userModel.ExMessage;
+            resModel.Data = {};
+            break;
+          case 2:
+            resModel.Status = false;
+            resModel.Message = userModel.ExMessage;
+            resModel.Data = {};
+            break;
+          default:
+            resModel.Status = false;
+            resModel.Message = 'Error occured during execution';
+            resModel.Data = {};
+            break;
+        }
+      }
+      res.json(resModel);
+    }).catch(function (err) {
+      resModel.Status = false;
+      resModel.Message = 'Error occured during execution';
+      resModel.Data = err;
+      res.json(resModel);
+    }).finally(function (err) {
+      _dbContaxt.destroyContext();
+    });
+  } catch (err) {
+    resModel.Status = false;
+    resModel.Message = 'Error occured during execution';
+    resModel.Data = err;
+    res.json(resModel);
+  }
+};
+
+
+/**
+ * @api {post} /api/user/UserAddressList User Address List
+ *  @apiName  User Address List
+ *  @apiGroup User 
+ *  @apiParam {Number}  UserId User Id
+ *  @apiDescription User Address List Service..
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UserAddressList
+ */
+exports.UserAddressList = function (req, res) {
+  try {
+    _dbContaxt.getContext().raw('Exec M_UserAddressList ?', [req.body.UserId]).then(function (spRes) {
+      if (spRes != null && spRes.length > 0) {
+        var userModel = spRes; //spRes[0];
+        resModel.Data = {};
+        resModel.Status = true;
+        if (userModel.length > 0) {
+          resModel.Message = 'Success';
+        } else {
+          resModel.Message = 'No records found';
+        }
+        resModel.Data = userModel;
+        res.json(resModel);
+      } else {
+        resModel.Status = false;
+        resModel.Message = 'No records found!';
+        resModel.Data = {};
+        res.json(resModel);
+      }
+    }).catch(function (err) {
+      resModel.Status = false;
+      resModel.Message = 'Error occured during execution';
+      resModel.Data = err;
+      res.json(resModel);
+    }).finally(function (err) {
+      _dbContaxt.destroyContext();
+    });
+  } catch (err) {
+    resModel.Status = false;
+    resModel.Message = 'Error occured during execution';
+    resModel.Data = err;
+    res.json(resModel);
+  }
+};
+
 
 /**
  * @api {post} /api/user/GetUserDashboardData Get User Dashboard Data
