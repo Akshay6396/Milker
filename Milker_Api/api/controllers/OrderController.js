@@ -12,42 +12,47 @@ var resModel = {
 
 
 /**
- * @api {post} /api/user/AddAddress Add Address
- *  @apiName Add Address
- *  @apiGroup User
+ * @api {post} /api/user/PlaceOrder Place Order
+ *  @apiName Place Order
+ *  @apiGroup Order
  
  *  @apiParam {Number}  UserId User Id
- *  @apiParam {String}  Address Address
- *  @apiParam {String}  SubLocality SubLocality
- *  @apiParam {String}  Locality Locality
- *  @apiParam {String}  SubAdmin SubAdmin
- *  @apiParam {String}  Admin Admin
- *  @apiParam {String}  PostalCode Postal Code
- *  @apiParam {String}  Lat Lattitude
- *  @apiParam {String}  Long Longitude
- *  @apiDescription Update Address Service..
- *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/AddAddress
+ *  @apiParam {Number}  MilkerId Milker Id
+ *  @apiParam {Decimal}  Amount Amount of order
+ *  @apiParam {String}  ProductInfo Json data of products
+ *  @apiParam {Number}  LocationId Location Id
+ *  @apiParam {String}  TxnId Transection Id
+ *  @apiParam {Number}  PaymentMethodTypeId Type of payment
+ *  @apiParam {Number}  OrderStatusId Status of the order
+ *  @apiParam {Number}  SubscriptionId Longitude
+ *  @apiDescription Place Order Service..
+ *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/order/PlaceOrder
  */
-exports.AddAddress = function (req, res) {
+exports.PlaceOrder = function (req, res) {
   try {
-    _dbContaxt.getContext().raw('Exec M_AddAddress ?,?,?,?,?,?,?,?,?', [req.body.UserId, req.body.Address, req.body.SubLocality, req.body.Locality, req.body.SubAdmin, req.body.Admin, req.body.PostalCode, req.body.Lat, req.body.Long]).then(function (spRes) {
+    _dbContaxt.getContext().raw('Exec M_PlaceOrder ?,?,?,?,?,?,?,?,?', [req.body.UserId, req.body.MilkerId, req.body.Amount, req.body.ProductInfo, req.body.LocationId, req.body.TxnId, req.body.PaymentMethodTypeId, req.body.OrderStatusId, req.body.SubscriptionId]).then(function (spRes) {
       if (spRes != null && spRes.length > 0) {
-        var userModel = spRes; //spRes[0];
+        var userModel = spRes[0];
         resModel.Data = {};
-        resModel.Status = true;
-        if (userModel.length > 0) {
-          resModel.Message = 'Success';
-        } else {
-          resModel.Message = 'No records found';
+        switch (userModel.ResStatus) {
+          case 1:
+            resModel.Status = true;
+            resModel.Message = 'Success';
+            resModel.Data = {};
+            break;
+          case -1:
+            resModel.Status = false;
+            resModel.Message = userModel.ExMessage;
+            resModel.Data = {};
+            break;
+          default:
+            resModel.Status = false;
+            resModel.Message = 'Error occured during execution';
+            resModel.Data = {};
+            break;
         }
-        resModel.Data = userModel;
-        res.json(resModel);
-      } else {
-        resModel.Status = false;
-        resModel.Message = 'No Agency found!';
-        resModel.Data = {};
-        res.json(resModel);
       }
+      res.json(resModel);
     }).catch(function (err) {
       resModel.Status = false;
       resModel.Message = 'Error occured during execution';
@@ -125,7 +130,7 @@ exports.DeleteAddress = function (req, res) {
  * @api {post} /api/user/UserAddressList User Address List
  *  @apiName  User Address List
  *  @apiGroup User 
- *  @apiParam {String}  UserId Check
+ *  @apiParam {Number}  UserId User Id
  *  @apiDescription User Address List Service..
  *  @apiSampleRequest http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UserAddressList
  */

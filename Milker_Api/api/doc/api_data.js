@@ -202,6 +202,91 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/user/PlaceOrder",
+    "title": "Place Order",
+    "name": "Place_Order",
+    "group": "Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "UserId",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "MilkerId",
+            "description": "<p>Milker Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Decimal",
+            "optional": false,
+            "field": "Amount",
+            "description": "<p>Amount of order</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ProductInfo",
+            "description": "<p>Json data of products</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "LocationId",
+            "description": "<p>Location Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "TxnId",
+            "description": "<p>Transection Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "PaymentMethodTypeId",
+            "description": "<p>Type of payment</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "OrderStatusId",
+            "description": "<p>Status of the order</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "SubscriptionId",
+            "description": "<p>Longitude</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Place Order Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/order/PlaceOrder"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/OrderController.js",
+    "groupTitle": "Order"
+  },
+  {
+    "type": "post",
     "url": "/api/product/AddUpdateProduct",
     "title": "Add and update Product",
     "name": "Add_Product",
@@ -353,6 +438,115 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/subscription/AddUpdateMasterSubsciption",
+    "title": "Add and Update Subscription",
+    "name": "Add_Update_Subscription",
+    "group": "Subscription",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>Subscription Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Name",
+            "description": "<p>Subscription Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ProductId",
+            "description": "<p>Product Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "SubscriptionTypeId",
+            "description": "<p>Subscription Type Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Decimal",
+            "optional": false,
+            "field": "OfferedPrice",
+            "description": "<p>Offered Price of Subscription</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "CreatedBy",
+            "description": "<p>Created By</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Add Subscription Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/subscription/AddUpdateMasterSubsciption"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/SubscriptionController.js",
+    "groupTitle": "Subscription"
+  },
+  {
+    "type": "post",
+    "url": "/api/subscription/DeleteMasterSubsciption",
+    "title": "Delete Subscription",
+    "name": "Delete_Subscription",
+    "group": "Subscription",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>Subscription Id</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Delete Subscription Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/subscription/DeleteMasterSubsciption"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/SubscriptionController.js",
+    "groupTitle": "Subscription"
+  },
+  {
+    "type": "post",
+    "url": "/api/subscription/GetMasterSubsciption",
+    "title": "Get Master Subscription",
+    "name": "Get_Master_Subscription",
+    "group": "Subscription",
+    "description": "<p>Get Subscription Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/subscription/GetMasterSubsciption"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/SubscriptionController.js",
+    "groupTitle": "Subscription"
+  },
+  {
+    "type": "post",
     "url": "/api/user/AddAddress",
     "title": "Add Address",
     "name": "Add_Address",
@@ -462,7 +656,72 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
+    "filename": "api/controllers/OrderController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/DeleteAddress",
+    "title": "Delete Address",
+    "name": "Delete_Address",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>Address Id</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Delete Address Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/DeleteAddress"
+      }
+    ],
+    "version": "0.0.0",
     "filename": "api/controllers/UserController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/GetMilkerOrders",
+    "title": "Get Milker Orders",
+    "name": "Get_Get_Milker_Orders",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "UserId",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Bool",
+            "optional": false,
+            "field": "IsMilker",
+            "description": "<p>Is Milker</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Get Milker Orders Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetMilkerOrders"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/OrderController.js",
     "groupTitle": "User"
   },
   {
@@ -534,6 +793,71 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
+    "filename": "api/controllers/OrderController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/GetUserDashboardData",
+    "title": "Get User Dashboard Data",
+    "name": "Get_User_Dashboard_Data",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Lat",
+            "description": "<p>Latitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Long",
+            "description": "<p>Longitude</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Get User Dashboard Data Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/GetUserDashboardData"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "api/controllers/UserController.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/UserAddressList",
+    "title": "User Address List",
+    "name": "User_Address_List",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "UserId",
+            "description": "<p>Check</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>User Address List Service..</p>",
+    "sampleRequest": [
+      {
+        "url": "http://ec2-54-219-161-189.us-west-1.compute.amazonaws.com:8010/api/user/UserAddressList"
+      }
+    ],
+    "version": "0.0.0",
     "filename": "api/controllers/UserController.js",
     "groupTitle": "User"
   },
@@ -563,7 +887,7 @@ define({ "api": [
       }
     ],
     "version": "0.0.0",
-    "filename": "api/controllers/UserController.js",
+    "filename": "api/controllers/OrderController.js",
     "groupTitle": "User"
   }
 ] });

@@ -7,6 +7,12 @@ var UserModel = require(_pathconst.ReqModelsPath.UserModel)
 var ProductCntrl = require(_pathconst.ControllersPath.ProductController)
 var ProductModel = require(_pathconst.ReqModelsPath.ProductModel)
 
+var OrderCntrl = require(_pathconst.ControllersPath.OrderController)
+var OrderModel = require(_pathconst.ReqModelsPath.OrderModel)
+
+var SubscriptionCntrl = require(_pathconst.ControllersPath.SubscriptionController)
+var SubscriptionModel = require(_pathconst.ReqModelsPath.SubscriptionModel)
+
 var AuthHelper = require(_pathconst.FilesPath.AuthHelper)
 var multer = require('multer');
 var upload = multer({
@@ -39,6 +45,18 @@ module.exports = function (app, validate) {
   app.post('/api/product/GetMilkerProductById', validate.body(ProductModel.GetMilkerProductByIdModal), ProductCntrl.GetMilkerProductById)
 
   // Product Routes Ends
+  
+  // Order Routes Starts
+  app.post('/api/order/PlaceOrder', validate.body(OrderModel.PlaceOrderModal), OrderCntrl.PlaceOrder)
+
+  // Order Routes Ends 
+  
+  // Subscription Routes Starts
+  app.post('/api/subscription/AddUpdateMasterSubsciption', validate.body(SubscriptionModel.AddUpdateMasterSubsciptionModal), SubscriptionCntrl.AddUpdateMasterSubsciption)
+  app.post('/api/subscription/DeleteMasterSubsciption', validate.body(SubscriptionModel.DeleteMasterSubsciptionModal), SubscriptionCntrl.DeleteMasterSubsciption)
+  app.post('/api/subscription/GetMasterSubsciption', SubscriptionCntrl.GetMasterSubsciption)
+
+  // Subscription Routes Ends
   app.post('/api/PDF/UploadImageOnServer', upload.single('upload'), (req, res) => {
     console.log("downloading");
     var tmp_path = req.file.path;
