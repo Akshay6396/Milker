@@ -1,3 +1,0 @@
-DB instance identifier: Debugged-Pro
-Master username: Debugged_Pro
-master password: hjfb#$54%
